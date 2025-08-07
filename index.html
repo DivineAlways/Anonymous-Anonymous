@@ -1,0 +1,2527 @@
+```html
+<!-- index.html content starts here -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Magic - Homepage</title>
+    <style>
+        /* Global Styles & Responsive Design */
+        :root {
+            --primary-bg: #f8f8f8; /* Light gray background */
+            --secondary-bg: #ffffff; /* White card background */
+            --text-color: #333; /* Dark gray text */
+            --link-color: #007bff; /* Blue for links */
+            --border-color: #ddd; /* Light gray border */
+            --header-footer-bg: #eee; /* Lighter gray for header/footer */
+            --accent-color: #7a00ff; /* Deep purple/violet for mystical touch */
+            --button-hover-bg: #5a00bd; /* Darker purple on hover */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Verdana', 'Arial', sans-serif; /* Clean sans-serif for body */
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Full viewport height */
+        }
+
+        /* Typography hints for mystical feel (wireframe clean) */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Georgia', 'Times New Roman', serif; /* Serif for headings */
+            color: var(--accent-color);
+            margin-top: 0;
+            margin-bottom: 0.8em;
+        }
+
+        h1 { font-size: 2.2rem; }
+        h2 { font-size: 1.8rem; }
+        h3 { font-size: 1.5rem; }
+
+        /* Header and Footer */
+        header, footer {
+            background-color: var(--header-footer-bg);
+            color: var(--text-color);
+            padding: 1rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle shadow */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky; /* Sticky header for better UX */
+            top: 0;
+            z-index: 100; /* Ensure it stays on top */
+        }
+
+        .site-title {
+            font-size: 1.6rem;
+            margin: 0;
+            flex-grow: 1; /* Allows title to take available space */
+            text-align: left;
+        }
+        .site-title a {
+            text-decoration: none;
+            color: var(--accent-color);
+        }
+
+        /* Navigation */
+        nav {
+            flex-shrink: 0; /* Prevents shrinking on large screens */
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 0.8rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-weight: bold;
+            padding: 0.5rem 0;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Main Content Area */
+        main {
+            flex-grow: 1;
+            padding: 1.5rem;
+            max-width: 1000px; /* Max width for content */
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        section {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* More pronounced shadow for sections */
+        }
+
+        /* Buttons */
+        .button {
+            display: inline-block;
+            background-color: var(--link-color);
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background-color: var(--button-hover-bg);
+            transform: translateY(-2px);
+        }
+
+        /* Forms */
+        form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        form label {
+            font-weight: bold;
+            margin-bottom: 0.2rem;
+            display: block;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="number"],
+        form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensures padding doesn't increase width */
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        form input[type="text"]:focus,
+        form input[type="email"]:focus,
+        form input[type="number"]:focus,
+        form textarea:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Utility classes */
+        .text-center { text-align: center; }
+        .margin-top { margin-top: 1.5rem; }
+
+        /* Footer Note */
+        .footer-note {
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 1rem;
+        }
+        .footer-note a {
+            color: var(--link-color);
+            text-decoration: underline;
+        }
+
+        /* Mobile Navigation Toggle (Hamburger) */
+        .nav-toggle {
+            display: none; /* Hidden by default on larger screens */
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            position: relative;
+            z-index: 1001;
+            margin-left: 1rem; /* Space from title */
+        }
+
+        .nav-toggle .bar {
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .site-title {
+                text-align: center; /* Center title on small screens */
+                flex-grow: 0; /* Don't grow too much, let nav toggle fit */
+            }
+
+            /* Adjust header layout for mobile */
+            header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem 1rem;
+            }
+
+            /* Hide regular nav and show toggle */
+            nav ul {
+                display: none; /* Hide default nav */
+                flex-direction: column;
+                position: fixed; /* Use fixed for full screen overlay */
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: rgba(255, 255, 255, 0.98); /* Near opaque overlay */
+                padding-top: 5rem; /* Space for the header */
+                justify-content: flex-start;
+                align-items: center;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                transform: translateX(-100%); /* Start off-screen */
+                transition: transform 0.3s ease-in-out;
+                z-index: 1000;
+                overflow-y: auto; /* Enable scrolling for long menus */
+            }
+
+            nav ul.active {
+                transform: translateX(0); /* Slide in */
+                display: flex; /* Show when active */
+            }
+
+            nav ul li {
+                margin: 0.7rem 0;
+                width: 90%; /* Make links wider */
+                text-align: center;
+            }
+
+            nav ul li a {
+                padding: 1rem;
+                border-bottom: 1px solid var(--border-color);
+                width: 100%; /* Fill available width */
+                box-sizing: border-box;
+            }
+
+            .nav-toggle {
+                display: flex; /* Show hamburger */
+                order: 2; /* Put toggle on the right */
+            }
+
+            /* Adjust main content padding */
+            main {
+                padding: 1rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            .featured-categories-grid {
+                flex-direction: column; /* Stack categories vertically */
+            }
+
+            .featured-category-card {
+                width: 100%; /* Full width for cards */
+                margin-bottom: 1rem; /* Add margin between stacked cards */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1 class="site-title"><a href="index.html">Money Magic</a></h1>
+        <!-- Mobile Navigation Toggle -->
+        <div class="nav-toggle" id="navToggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <!-- Main Navigation (visible on desktop, hidden initially on mobile) -->
+        <nav id="mainNav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="spell-categories.html">Browse Spells</a></li>
+                <li><a href="user-profile.html">My Favorites</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        <!-- Welcome Section -->
+        <section>
+            <h2>Welcome to Money Magic!</h2>
+            <p>Unlock the secrets to financial abundance and prosperity. Our comprehensive database of money spells, sourced directly from the 'Money Magic' PDF, provides detailed instructions and insights to guide your journey.</p>
+            <p>Whether you're looking for quick gains or long-term financial influence, our mystical archive is here to assist you.</p>
+            <a href="spell-categories.html" class="button">Explore Spells Now</a>
+        </section>
+
+        <!-- Featured Categories Section -->
+        <section>
+            <h2>Featured Spell Categories</h2>
+            <div class="featured-categories-grid" style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center;">
+                <div class="featured-category-card" style="flex: 1 1 calc(33% - 1.5rem); min-width: 280px; background-color: var(--primary-bg); padding: 1rem; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <h3>Sigil Rituals</h3>
+                    <p>For smaller, quicker gains. Focus your intent into powerful symbols.</p>
+                    <a href="spell-categories.html#sigils" class="button">Learn More</a>
+                </div>
+                <div class="featured-category-card" style="flex: 1 1 calc(33% - 1.5rem); min-width: 280px; background-color: var(--primary-bg); padding: 1rem; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <h3>Servitor Creation</h3>
+                    <p>For long-term financial influence and consistent growth.</p>
+                    <a href="spell-categories.html#servitors" class="button">Learn More</a>
+                </div>
+                <div class="featured-category-card" style="flex: 1 1 calc(33% - 1.5rem); min-width: 280px; background-color: var(--primary-bg); padding: 1rem; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <h3>Evoking Jupiter</h3>
+                    <p>For potentially larger, less controllable wealth and grand opportunities.</p>
+                    <a href="spell-categories.html#jupiter" class="button">Learn More</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; Anonymous Anonymous. All rights reserved.</p>
+        <p class="footer-note">Website for a 'Money Magic' PDF Prototype - Wireframe Only</p>
+        <p class="footer-note"><a href="#documentation" style="color: #007bff; text-decoration: underline;">Developer Documentation (Placeholder)</a></p>
+    </footer>
+
+    <!-- JavaScript for Mobile Navigation Toggle -->
+    <script>
+        // JS for Hamburger Menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.getElementById('navToggle');
+            const mainNav = document.getElementById('mainNav').querySelector('ul'); // Get the UL element
+
+            navToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+
+            // Close nav when a link is clicked (for single-page navigation or when navigating between pages)
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+<!-- index.html content ends here -->
+
+<!-- spell-categories.html content starts here -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Magic - Spell Categories</title>
+    <style>
+        /* Global Styles & Responsive Design */
+        :root {
+            --primary-bg: #f8f8f8; /* Light gray background */
+            --secondary-bg: #ffffff; /* White card background */
+            --text-color: #333; /* Dark gray text */
+            --link-color: #007bff; /* Blue for links */
+            --border-color: #ddd; /* Light gray border */
+            --header-footer-bg: #eee; /* Lighter gray for header/footer */
+            --accent-color: #7a00ff; /* Deep purple/violet for mystical touch */
+            --button-hover-bg: #5a00bd; /* Darker purple on hover */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Verdana', 'Arial', sans-serif; /* Clean sans-serif for body */
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Full viewport height */
+        }
+
+        /* Typography hints for mystical feel (wireframe clean) */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Georgia', 'Times New Roman', serif; /* Serif for headings */
+            color: var(--accent-color);
+            margin-top: 0;
+            margin-bottom: 0.8em;
+        }
+
+        h1 { font-size: 2.2rem; }
+        h2 { font-size: 1.8rem; }
+        h3 { font-size: 1.5rem; }
+
+        /* Header and Footer */
+        header, footer {
+            background-color: var(--header-footer-bg);
+            color: var(--text-color);
+            padding: 1rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle shadow */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky; /* Sticky header for better UX */
+            top: 0;
+            z-index: 100; /* Ensure it stays on top */
+        }
+
+        .site-title {
+            font-size: 1.6rem;
+            margin: 0;
+            flex-grow: 1; /* Allows title to take available space */
+            text-align: left;
+        }
+        .site-title a {
+            text-decoration: none;
+            color: var(--accent-color);
+        }
+
+        /* Navigation */
+        nav {
+            flex-shrink: 0; /* Prevents shrinking on large screens */
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 0.8rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-weight: bold;
+            padding: 0.5rem 0;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Main Content Area */
+        main {
+            flex-grow: 1;
+            padding: 1.5rem;
+            max-width: 1000px; /* Max width for content */
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        section {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* More pronounced shadow for sections */
+        }
+
+        /* Buttons */
+        .button {
+            display: inline-block;
+            background-color: var(--link-color);
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background-color: var(--button-hover-bg);
+            transform: translateY(-2px);
+        }
+
+        /* Forms */
+        form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        form label {
+            font-weight: bold;
+            margin-bottom: 0.2rem;
+            display: block;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="number"],
+        form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensures padding doesn't increase width */
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        form input[type="text"]:focus,
+        form input[type="email"]:focus,
+        form input[type="number"]:focus,
+        form textarea:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Utility classes */
+        .text-center { text-align: center; }
+        .margin-top { margin-top: 1.5rem; }
+
+        /* Footer Note */
+        .footer-note {
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 1rem;
+        }
+        .footer-note a {
+            color: var(--link-color);
+            text-decoration: underline;
+        }
+
+        /* Mobile Navigation Toggle (Hamburger) */
+        .nav-toggle {
+            display: none; /* Hidden by default on larger screens */
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            position: relative;
+            z-index: 1001;
+            margin-left: 1rem; /* Space from title */
+        }
+
+        .nav-toggle .bar {
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        /* Specific styles for Spell Categories */
+        .search-bar {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        .search-bar input[type="text"] {
+            flex-grow: 1;
+        }
+        .spell-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .spell-card {
+            background-color: var(--primary-bg);
+            padding: 1.2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .spell-card:hover {
+            transform: translateY(-5px);
+        }
+        .spell-card h3 {
+            color: var(--link-color);
+            margin-bottom: 0.5rem;
+        }
+        .spell-card p {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .site-title {
+                text-align: center;
+                flex-grow: 0;
+            }
+
+            header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem 1rem;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: rgba(255, 255, 255, 0.98);
+                padding-top: 5rem;
+                justify-content: flex-start;
+                align-items: center;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+                z-index: 1000;
+                overflow-y: auto;
+            }
+
+            nav ul.active {
+                transform: translateX(0);
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 0.7rem 0;
+                width: 90%;
+                text-align: center;
+            }
+
+            nav ul li a {
+                padding: 1rem;
+                border-bottom: 1px solid var(--border-color);
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .nav-toggle {
+                display: flex;
+                order: 2;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+            
+            .search-bar {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1 class="site-title"><a href="index.html">Money Magic</a></h1>
+        <!-- Mobile Navigation Toggle -->
+        <div class="nav-toggle" id="navToggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <!-- Main Navigation -->
+        <nav id="mainNav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="spell-categories.html">Browse Spells</a></li>
+                <li><a href="user-profile.html">My Favorites</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        <!-- Browse Spells Section -->
+        <section>
+            <h2>Browse All Spells</h2>
+
+            <!-- Search Functionality -->
+            <div class="search-bar">
+                <input type="text" placeholder="Search for spells..." aria-label="Search for spells">
+                <button class="button">Search</button>
+            </div>
+
+            <!-- Spell Categories / List -->
+            <div class="spell-grid">
+                <!-- Spell Card Example: Sigil Rituals -->
+                <article class="spell-card" id="sigils">
+                    <h3>Sigil of Quick Manifestation</h3>
+                    <p>A basic sigil ritual for immediate, small financial gains. Easy to learn and execute.</p>
+                    <a href="spell-detail.html?spell=sigil-quick-manifestation" class="button">View Spell</a>
+                </article>
+
+                <!-- Spell Card Example: Servitors -->
+                <article class="spell-card" id="servitors">
+                    <h3>Servitor of Steady Income</h3>
+                    <p>Create a dedicated servitor to attract consistent and reliable income streams over time.</p>
+                    <a href="spell-detail.html?spell=servitor-steady-income" class="button">View Spell</a>
+                </article>
+
+                <!-- Spell Card Example: Evoking Jupiter -->
+                <article class="spell-card" id="jupiter">
+                    <h3>Jupiter's Blessing for Grand Wealth</h3>
+                    <p>An advanced ritual to invoke the planetary energy of Jupiter for significant financial opportunities.</p>
+                    <a href="spell-detail.html?spell=jupiter-grand-wealth" class="button">View Spell</a>
+                </article>
+
+                <!-- Placeholder Spell Card 1 -->
+                <article class="spell-card">
+                    <h3>Charm of Unexpected Gifts</h3>
+                    <p>A simple charm to draw unexpected monetary gifts or fortunate circumstances.</p>
+                    <a href="spell-detail.html?spell=charm-unexpected-gifts" class="button">View Spell</a>
+                </article>
+
+                <!-- Placeholder Spell Card 2 -->
+                <article class="spell-card">
+                    <h3>Lunar Cycle Prosperity Ritual</h3>
+                    <p>Align with lunar energies to enhance your financial growth each month.</p>
+                    <a href="spell-detail.html?spell=lunar-prosperity" class="button">View Spell</a>
+                </article>
+
+                <!-- Placeholder Spell Card 3 -->
+                <article class="spell-card">
+                    <h3>Cleansing Spell for Debt Release</h3>
+                    <p>A potent ritual to help release the burden of debt and attract financial freedom.</p>
+                    <a href="spell-detail.html?spell=debt-release" class="button">View Spell</a>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; Anonymous Anonymous. All rights reserved.</p>
+        <p class="footer-note">Website for a 'Money Magic' PDF Prototype - Wireframe Only</p>
+    </footer>
+
+    <!-- JavaScript for Mobile Navigation Toggle -->
+    <script>
+        // JS for Hamburger Menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.getElementById('navToggle');
+            const mainNav = document.getElementById('mainNav').querySelector('ul');
+
+            navToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+<!-- spell-categories.html content ends here -->
+
+<!-- spell-detail.html content starts here -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Magic - Spell Detail</title>
+    <style>
+        /* Global Styles & Responsive Design */
+        :root {
+            --primary-bg: #f8f8f8; /* Light gray background */
+            --secondary-bg: #ffffff; /* White card background */
+            --text-color: #333; /* Dark gray text */
+            --link-color: #007bff; /* Blue for links */
+            --border-color: #ddd; /* Light gray border */
+            --header-footer-bg: #eee; /* Lighter gray for header/footer */
+            --accent-color: #7a00ff; /* Deep purple/violet for mystical touch */
+            --button-hover-bg: #5a00bd; /* Darker purple on hover */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Verdana', 'Arial', sans-serif; /* Clean sans-serif for body */
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Full viewport height */
+        }
+
+        /* Typography hints for mystical feel (wireframe clean) */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Georgia', 'Times New Roman', serif; /* Serif for headings */
+            color: var(--accent-color);
+            margin-top: 0;
+            margin-bottom: 0.8em;
+        }
+
+        h1 { font-size: 2.2rem; }
+        h2 { font-size: 1.8rem; }
+        h3 { font-size: 1.5rem; }
+
+        /* Header and Footer */
+        header, footer {
+            background-color: var(--header-footer-bg);
+            color: var(--text-color);
+            padding: 1rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle shadow */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky; /* Sticky header for better UX */
+            top: 0;
+            z-index: 100; /* Ensure it stays on top */
+        }
+
+        .site-title {
+            font-size: 1.6rem;
+            margin: 0;
+            flex-grow: 1; /* Allows title to take available space */
+            text-align: left;
+        }
+        .site-title a {
+            text-decoration: none;
+            color: var(--accent-color);
+        }
+
+        /* Navigation */
+        nav {
+            flex-shrink: 0; /* Prevents shrinking on large screens */
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 0.8rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-weight: bold;
+            padding: 0.5rem 0;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Main Content Area */
+        main {
+            flex-grow: 1;
+            padding: 1.5rem;
+            max-width: 1000px; /* Max width for content */
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        section {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* More pronounced shadow for sections */
+        }
+
+        /* Buttons */
+        .button {
+            display: inline-block;
+            background-color: var(--link-color);
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background-color: var(--button-hover-bg);
+            transform: translateY(-2px);
+        }
+
+        /* Forms */
+        form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        form label {
+            font-weight: bold;
+            margin-bottom: 0.2rem;
+            display: block;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="number"],
+        form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensures padding doesn't increase width */
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        form input[type="text"]:focus,
+        form input[type="email"]:focus,
+        form input[type="number"]:focus,
+        form textarea:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Utility classes */
+        .text-center { text-align: center; }
+        .margin-top { margin-top: 1.5rem; }
+
+        /* Footer Note */
+        .footer-note {
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 1rem;
+        }
+        .footer-note a {
+            color: var(--link-color);
+            text-decoration: underline;
+        }
+
+        /* Mobile Navigation Toggle (Hamburger) */
+        .nav-toggle {
+            display: none; /* Hidden by default on larger screens */
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            position: relative;
+            z-index: 1001;
+            margin-left: 1rem; /* Space from title */
+        }
+
+        .nav-toggle .bar {
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        /* Specific styles for Spell Detail */
+        .spell-image-placeholder {
+            width: 100%;
+            height: 250px;
+            background-color: #ccc;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            color: #666;
+            text-align: center;
+        }
+        .spell-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .spell-info > div {
+            flex: 1 1 calc(50% - 1.5rem);
+            min-width: 250px;
+        }
+        .spell-info ul {
+            list-style: none;
+            padding: 0;
+        }
+        .spell-info ul li {
+            margin-bottom: 0.5rem;
+        }
+        .rating-stars {
+            color: gold; /* Visual star color */
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        .rating-stars span {
+            cursor: pointer; /* Suggests interactivity */
+        }
+        .review-section {
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+        .review-card {
+            background-color: var(--primary-bg);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .review-card strong {
+            color: var(--accent-color);
+        }
+        .review-card .review-date {
+            font-size: 0.85rem;
+            color: #777;
+            margin-left: 0.5rem;
+        }
+        .add-review-form textarea {
+            min-height: 80px;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .site-title {
+                text-align: center;
+                flex-grow: 0;
+            }
+
+            header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem 1rem;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: rgba(255, 255, 255, 0.98);
+                padding-top: 5rem;
+                justify-content: flex-start;
+                align-items: center;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+                z-index: 1000;
+                overflow-y: auto;
+            }
+
+            nav ul.active {
+                transform: translateX(0);
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 0.7rem 0;
+                width: 90%;
+                text-align: center;
+            }
+
+            nav ul li a {
+                padding: 1rem;
+                border-bottom: 1px solid var(--border-color);
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .nav-toggle {
+                display: flex;
+                order: 2;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            .spell-info {
+                flex-direction: column; /* Stack spell info sections */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1 class="site-title"><a href="index.html">Money Magic</a></h1>
+        <!-- Mobile Navigation Toggle -->
+        <div class="nav-toggle" id="navToggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <!-- Main Navigation -->
+        <nav id="mainNav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="spell-categories.html">Browse Spells</a></li>
+                <li><a href="user-profile.html">My Favorites</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        <!-- Spell Detail Section -->
+        <section>
+            <h2>Sigil of Quick Manifestation</h2>
+
+            <!-- Placeholder for Spell Imagery/Design -->
+            <div class="spell-image-placeholder">
+                <p>[Placeholder for Mystical Sigil Design]</p>
+            </div>
+
+            <!-- Spell Information -->
+            <div class="spell-info">
+                <div>
+                    <h3>Overview</h3>
+                    <p>This sigil ritual is designed for those seeking rapid, albeit smaller, financial gains. It focuses on clarifying your intent and directing psychic energy towards a personalized visual symbol.</p>
+                    <p>The Money Magic PDF describes this as ideal for unexpected gifts, finding forgotten money, or receiving small bonuses.</p>
+                </div>
+                <div>
+                    <h3>Materials Needed</h3>
+                    <ul>
+                        <li><strong>Paper or Digital Medium:</strong> For drawing your sigil.</li>
+                        <li><strong>Pen/Pencil/Stylus:</strong> For creation.</li>
+                        <li><strong>Quiet Space:</strong> For concentration.</li>
+                        <li><strong>Altered State:</strong> A state of focused consciousness (e.g., meditation, light trance).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Instructions -->
+            <div class="margin-top">
+                <h3>Instructions</h3>
+                <ol>
+                    <li><strong>Statement of Intent:</strong> Clearly and specifically write down what you wish to manifest. (e.g., "I shall receive a gift card for $50 by Tuesday.")</li>
+                    <li><strong>Sigil Creation:</strong>
+                        <ul>
+                            <li>Remove all repeating letters and all vowels from your statement.</li>
+                            <li>From the remaining letters, create an abstract visual design. Focus on flow and personal meaning, not legibility.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Charging the Sigil:</strong>
+                        <ul>
+                            <li>Enter an altered state of consciousness.</li>
+                            <li>Focus intensely on the sigil, directing your psychic energy towards it. Visualize your intent manifesting.</li>
+                            <li>Once charged, immediately put the sigil away or destroy it (e.g., burn, tear, delete) and forget about it. Let the magic work!</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <!-- Actions -->
+            <div class="margin-top">
+                <a href="#" class="button">Save to Favorites</a>
+                <a href="spell-categories.html" class="button" style="margin-left: 1rem;">Back to Spells</a>
+            </div>
+
+            <!-- Rating and Reviews Section -->
+            <div class="review-section">
+                <h3>User Ratings & Reviews</h3>
+                <p><strong>Average Rating:</strong> 
+                    <span class="rating-stars">
+                        <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9734;</span> (4.0/5)
+                    </span>
+                </p>
+
+                <h4>Reviews</h4>
+                <div class="review-card">
+                    <strong>Anonymous User</strong> <span class="review-date">on 2023-10-26</span>
+                    <p><em>"Worked for me! Got a small refund I wasn't expecting a few days after. Simple and effective."</em></p>
+                    <span class="rating-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                </div>
+                <div class="review-card">
+                    <strong>Mystic Seeker</strong> <span class="review-date">on 2023-10-20</span>
+                    <p><em>"Clear instructions. Still waiting for results, but felt a strong energy during the ritual."</em></p>
+                    <span class="rating-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                </div>
+                <div class="review-card">
+                    <strong>Fortune Hunter</strong> <span class="review-date">on 2023-09-15</span>
+                    <p><em>"The concept is interesting, but I might need more practice with the altered state. No immediate results yet."</em></p>
+                    <span class="rating-stars">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+                </div>
+
+                <h4>Add Your Review</h4>
+                <form class="add-review-form">
+                    <label for="reviewName">Your Name:</label>
+                    <input type="text" id="reviewName" name="reviewName" required>
+
+                    <label for="reviewRating">Rating (1-5 Stars):</label>
+                    <input type="number" id="reviewRating" name="reviewRating" min="1" max="5" required>
+
+                    <label for="reviewComment">Your Comments:</label>
+                    <textarea id="reviewComment" name="reviewComment" rows="4" required></textarea>
+
+                    <button type="submit" class="button">Submit Review</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; Anonymous Anonymous. All rights reserved.</p>
+        <p class="footer-note">Website for a 'Money Magic' PDF Prototype - Wireframe Only</p>
+    </footer>
+
+    <!-- JavaScript for Mobile Navigation Toggle -->
+    <script>
+        // JS for Hamburger Menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.getElementById('navToggle');
+            const mainNav = document.getElementById('mainNav').querySelector('ul');
+
+            navToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+<!-- spell-detail.html content ends here -->
+
+<!-- user-profile.html content starts here -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Magic - My Favorites</title>
+    <style>
+        /* Global Styles & Responsive Design */
+        :root {
+            --primary-bg: #f8f8f8; /* Light gray background */
+            --secondary-bg: #ffffff; /* White card background */
+            --text-color: #333; /* Dark gray text */
+            --link-color: #007bff; /* Blue for links */
+            --border-color: #ddd; /* Light gray border */
+            --header-footer-bg: #eee; /* Lighter gray for header/footer */
+            --accent-color: #7a00ff; /* Deep purple/violet for mystical touch */
+            --button-hover-bg: #5a00bd; /* Darker purple on hover */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Verdana', 'Arial', sans-serif; /* Clean sans-serif for body */
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Full viewport height */
+        }
+
+        /* Typography hints for mystical feel (wireframe clean) */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Georgia', 'Times New Roman', serif; /* Serif for headings */
+            color: var(--accent-color);
+            margin-top: 0;
+            margin-bottom: 0.8em;
+        }
+
+        h1 { font-size: 2.2rem; }
+        h2 { font-size: 1.8rem; }
+        h3 { font-size: 1.5rem; }
+
+        /* Header and Footer */
+        header, footer {
+            background-color: var(--header-footer-bg);
+            color: var(--text-color);
+            padding: 1rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle shadow */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky; /* Sticky header for better UX */
+            top: 0;
+            z-index: 100; /* Ensure it stays on top */
+        }
+
+        .site-title {
+            font-size: 1.6rem;
+            margin: 0;
+            flex-grow: 1; /* Allows title to take available space */
+            text-align: left;
+        }
+        .site-title a {
+            text-decoration: none;
+            color: var(--accent-color);
+        }
+
+        /* Navigation */
+        nav {
+            flex-shrink: 0; /* Prevents shrinking on large screens */
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 0.8rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-weight: bold;
+            padding: 0.5rem 0;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Main Content Area */
+        main {
+            flex-grow: 1;
+            padding: 1.5rem;
+            max-width: 1000px; /* Max width for content */
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        section {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* More pronounced shadow for sections */
+        }
+
+        /* Buttons */
+        .button {
+            display: inline-block;
+            background-color: var(--link-color);
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background-color: var(--button-hover-bg);
+            transform: translateY(-2px);
+        }
+
+        /* Forms */
+        form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        form label {
+            font-weight: bold;
+            margin-bottom: 0.2rem;
+            display: block;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="number"],
+        form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensures padding doesn't increase width */
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        form input[type="text"]:focus,
+        form input[type="email"]:focus,
+        form input[type="number"]:focus,
+        form textarea:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Utility classes */
+        .text-center { text-align: center; }
+        .margin-top { margin-top: 1.5rem; }
+
+        /* Footer Note */
+        .footer-note {
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 1rem;
+        }
+        .footer-note a {
+            color: var(--link-color);
+            text-decoration: underline;
+        }
+
+        /* Mobile Navigation Toggle (Hamburger) */
+        .nav-toggle {
+            display: none; /* Hidden by default on larger screens */
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            position: relative;
+            z-index: 1001;
+            margin-left: 1rem; /* Space from title */
+        }
+
+        .nav-toggle .bar {
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        /* Specific styles for User Profile */
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+            overflow: hidden; /* For future image */
+        }
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .favorite-spells-list {
+            list-style: none;
+            padding: 0;
+        }
+        .favorite-spells-list li {
+            background-color: var(--primary-bg);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* For responsiveness */
+        }
+        .favorite-spells-list li h3 {
+            margin: 0;
+            color: var(--link-color);
+            flex-grow: 1; /* Allows title to take space */
+        }
+        .favorite-spells-list li a.button {
+            margin-top: 0.5rem; /* Space button when wrapped */
+        }
+        @media (max-width: 480px) {
+            .favorite-spells-list li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .favorite-spells-list li a.button {
+                width: 100%;
+                text-align: center;
+                margin-top: 1rem;
+            }
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .site-title {
+                text-align: center;
+                flex-grow: 0;
+            }
+
+            header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem 1rem;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: rgba(255, 255, 255, 0.98);
+                padding-top: 5rem;
+                justify-content: flex-start;
+                align-items: center;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+                z-index: 1000;
+                overflow-y: auto;
+            }
+
+            nav ul.active {
+                transform: translateX(0);
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 0.7rem 0;
+                width: 90%;
+                text-align: center;
+            }
+
+            nav ul li a {
+                padding: 1rem;
+                border-bottom: 1px solid var(--border-color);
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .nav-toggle {
+                display: flex;
+                order: 2;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1 class="site-title"><a href="index.html">Money Magic</a></h1>
+        <!-- Mobile Navigation Toggle -->
+        <div class="nav-toggle" id="navToggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <!-- Main Navigation -->
+        <nav id="mainNav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="spell-categories.html">Browse Spells</a></li>
+                <li><a href="user-profile.html">My Favorites</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        <!-- User Profile Section -->
+        <section>
+            <h2>My Favorites</h2>
+
+            <!-- User Info (Placeholder) -->
+            <div class="profile-info">
+                <div class="profile-avatar">[User Avatar]</div>
+                <h3>Welcome, Anonymous User!</h3>
+                <p>Manage your saved spells and personal preferences here.</p>
+            </div>
+
+            <!-- Saved Spells List -->
+            <div class="margin-top">
+                <h3>My Saved Spells</h3>
+                <ul class="favorite-spells-list">
+                    <li>
+                        <h3>Sigil of Quick Manifestation</h3>
+                        <a href="spell-detail.html?spell=sigil-quick-manifestation" class="button">View Spell</a>
+                    </li>
+                    <li>
+                        <h3>Servitor of Steady Income</h3>
+                        <a href="spell-detail.html?spell=servitor-steady-income" class="button">View Spell</a>
+                    </li>
+                    <li>
+                        <h3>Charm of Unexpected Gifts</h3>
+                        <a href="spell-detail.html?spell=charm-unexpected-gifts" class="button">View Spell</a>
+                    </li>
+                    <li>
+                        <h3>Lunar Cycle Prosperity Ritual</h3>
+                        <a href="spell-detail.html?spell=lunar-prosperity" class="button">View Spell</a>
+                    </li>
+                    <!-- More saved spells can be added here -->
+                    <li style="background-color: transparent; box-shadow: none; justify-content: center; text-align: center;">
+                        <p>No more spells saved. <a href="spell-categories.html">Browse more spells</a> to add to your favorites!</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; Anonymous Anonymous. All rights reserved.</p>
+        <p class="footer-note">Website for a 'Money Magic' PDF Prototype - Wireframe Only</p>
+    </footer>
+
+    <!-- JavaScript for Mobile Navigation Toggle -->
+    <script>
+        // JS for Hamburger Menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.getElementById('navToggle');
+            const mainNav = document.getElementById('mainNav').querySelector('ul');
+
+            navToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+<!-- user-profile.html content ends here -->
+
+<!-- about.html content starts here -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Magic - About Us</title>
+    <style>
+        /* Global Styles & Responsive Design */
+        :root {
+            --primary-bg: #f8f8f8; /* Light gray background */
+            --secondary-bg: #ffffff; /* White card background */
+            --text-color: #333; /* Dark gray text */
+            --link-color: #007bff; /* Blue for links */
+            --border-color: #ddd; /* Light gray border */
+            --header-footer-bg: #eee; /* Lighter gray for header/footer */
+            --accent-color: #7a00ff; /* Deep purple/violet for mystical touch */
+            --button-hover-bg: #5a00bd; /* Darker purple on hover */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Verdana', 'Arial', sans-serif; /* Clean sans-serif for body */
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Full viewport height */
+        }
+
+        /* Typography hints for mystical feel (wireframe clean) */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Georgia', 'Times New Roman', serif; /* Serif for headings */
+            color: var(--accent-color);
+            margin-top: 0;
+            margin-bottom: 0.8em;
+        }
+
+        h1 { font-size: 2.2rem; }
+        h2 { font-size: 1.8rem; }
+        h3 { font-size: 1.5rem; }
+
+        /* Header and Footer */
+        header, footer {
+            background-color: var(--header-footer-bg);
+            color: var(--text-color);
+            padding: 1rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle shadow */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky; /* Sticky header for better UX */
+            top: 0;
+            z-index: 100; /* Ensure it stays on top */
+        }
+
+        .site-title {
+            font-size: 1.6rem;
+            margin: 0;
+            flex-grow: 1; /* Allows title to take available space */
+            text-align: left;
+        }
+        .site-title a {
+            text-decoration: none;
+            color: var(--accent-color);
+        }
+
+        /* Navigation */
+        nav {
+            flex-shrink: 0; /* Prevents shrinking on large screens */
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 0.8rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-weight: bold;
+            padding: 0.5rem 0;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Main Content Area */
+        main {
+            flex-grow: 1;
+            padding: 1.5rem;
+            max-width: 1000px; /* Max width for content */
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        section {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* More pronounced shadow for sections */
+        }
+
+        /* Buttons */
+        .button {
+            display: inline-block;
+            background-color: var(--link-color);
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background-color: var(--button-hover-bg);
+            transform: translateY(-2px);
+        }
+
+        /* Forms */
+        form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        form label {
+            font-weight: bold;
+            margin-bottom: 0.2rem;
+            display: block;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="number"],
+        form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensures padding doesn't increase width */
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        form input[type="text"]:focus,
+        form input[type="email"]:focus,
+        form input[type="number"]:focus,
+        form textarea:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Utility classes */
+        .text-center { text-align: center; }
+        .margin-top { margin-top: 1.5rem; }
+
+        /* Footer Note */
+        .footer-note {
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 1rem;
+        }
+        .footer-note a {
+            color: var(--link-color);
+            text-decoration: underline;
+        }
+
+        /* Mobile Navigation Toggle (Hamburger) */
+        .nav-toggle {
+            display: none; /* Hidden by default on larger screens */
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            position: relative;
+            z-index: 1001;
+            margin-left: 1rem; /* Space from title */
+        }
+
+        .nav-toggle .bar {
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        /* Specific styles for About Us */
+        .about-image-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #e0e0e0;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            color: #666;
+            text-align: center;
+        }
+        .about-text p {
+            margin-bottom: 1rem;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .site-title {
+                text-align: center;
+                flex-grow: 0;
+            }
+
+            header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem 1rem;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: rgba(255, 255, 255, 0.98);
+                padding-top: 5rem;
+                justify-content: flex-start;
+                align-items: center;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+                z-index: 1000;
+                overflow-y: auto;
+            }
+
+            nav ul.active {
+                transform: translateX(0);
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 0.7rem 0;
+                width: 90%;
+                text-align: center;
+            }
+
+            nav ul li a {
+                padding: 1rem;
+                border-bottom: 1px solid var(--border-color);
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .nav-toggle {
+                display: flex;
+                order: 2;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1 class="site-title"><a href="index.html">Money Magic</a></h1>
+        <!-- Mobile Navigation Toggle -->
+        <div class="nav-toggle" id="navToggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <!-- Main Navigation -->
+        <nav id="mainNav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="spell-categories.html">Browse Spells</a></li>
+                <li><a href="user-profile.html">My Favorites</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        <!-- About Us Section -->
+        <section>
+            <h2>About Money Magic</h2>
+
+            <!-- Placeholder Image/Graphic -->
+            <div class="about-image-placeholder">
+                <p>[Placeholder for Mystical & Abundance Imagery]</p>
+            </div>
+
+            <!-- About Text -->
+            <div class="about-text">
+                <p>Welcome to Money Magic, your digital compendium for understanding and applying the ancient art of wealth manifestation. Our mission is to demystify financial magic, making its principles accessible to everyone seeking abundance.</p>
+                <p>All the spells and rituals featured on this website are meticulously curated from the highly regarded 'Money Magic' PDF. We aim to provide clear, detailed instructions and explanations, empowering you to safely and effectively work with these powerful energies.</p>
+                <p>We believe that financial prosperity is not just about material gain, but about achieving a state of flow and energetic alignment where opportunities naturally present themselves. Our tools and resources are designed to help you cultivate this mindset and attract positive financial outcomes.</p>
+                <p>Thank you for joining our community. We are dedicated to continuously updating our database with new insights and ensuring a user-friendly experience that supports your journey to financial empowerment.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; Anonymous Anonymous. All rights reserved.</p>
+        <p class="footer-note">Website for a 'Money Magic' PDF Prototype - Wireframe Only</p>
+    </footer>
+
+    <!-- JavaScript for Mobile Navigation Toggle -->
+    <script>
+        // JS for Hamburger Menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.getElementById('navToggle');
+            const mainNav = document.getElementById('mainNav').querySelector('ul');
+
+            navToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+<!-- about.html content ends here -->
+
+<!-- contact.html content starts here -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Magic - Contact Us</title>
+    <style>
+        /* Global Styles & Responsive Design */
+        :root {
+            --primary-bg: #f8f8f8; /* Light gray background */
+            --secondary-bg: #ffffff; /* White card background */
+            --text-color: #333; /* Dark gray text */
+            --link-color: #007bff; /* Blue for links */
+            --border-color: #ddd; /* Light gray border */
+            --header-footer-bg: #eee; /* Lighter gray for header/footer */
+            --accent-color: #7a00ff; /* Deep purple/violet for mystical touch */
+            --button-hover-bg: #5a00bd; /* Darker purple on hover */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Verdana', 'Arial', sans-serif; /* Clean sans-serif for body */
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Full viewport height */
+        }
+
+        /* Typography hints for mystical feel (wireframe clean) */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Georgia', 'Times New Roman', serif; /* Serif for headings */
+            color: var(--accent-color);
+            margin-top: 0;
+            margin-bottom: 0.8em;
+        }
+
+        h1 { font-size: 2.2rem; }
+        h2 { font-size: 1.8rem; }
+        h3 { font-size: 1.5rem; }
+
+        /* Header and Footer */
+        header, footer {
+            background-color: var(--header-footer-bg);
+            color: var(--text-color);
+            padding: 1rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle shadow */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky; /* Sticky header for better UX */
+            top: 0;
+            z-index: 100; /* Ensure it stays on top */
+        }
+
+        .site-title {
+            font-size: 1.6rem;
+            margin: 0;
+            flex-grow: 1; /* Allows title to take available space */
+            text-align: left;
+        }
+        .site-title a {
+            text-decoration: none;
+            color: var(--accent-color);
+        }
+
+        /* Navigation */
+        nav {
+            flex-shrink: 0; /* Prevents shrinking on large screens */
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 0.8rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-weight: bold;
+            padding: 0.5rem 0;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Main Content Area */
+        main {
+            flex-grow: 1;
+            padding: 1.5rem;
+            max-width: 1000px; /* Max width for content */
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        section {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* More pronounced shadow for sections */
+        }
+
+        /* Buttons */
+        .button {
+            display: inline-block;
+            background-color: var(--link-color);
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background-color: var(--button-hover-bg);
+            transform: translateY(-2px);
+        }
+
+        /* Forms */
+        form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        form label {
+            font-weight: bold;
+            margin-bottom: 0.2rem;
+            display: block;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="number"],
+        form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensures padding doesn't increase width */
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        form input[type="text"]:focus,
+        form input[type="email"]:focus,
+        form input[type="number"]:focus,
+        form textarea:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Utility classes */
+        .text-center { text-align: center; }
+        .margin-top { margin-top: 1.5rem; }
+
+        /* Footer Note */
+        .footer-note {
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 1rem;
+        }
+        .footer-note a {
+            color: var(--link-color);
+            text-decoration: underline;
+        }
+
+        /* Mobile Navigation Toggle (Hamburger) */
+        .nav-toggle {
+            display: none; /* Hidden by default on larger screens */
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            position: relative;
+            z-index: 1001;
+            margin-left: 1rem; /* Space from title */
+        }
+
+        .nav-toggle .bar {
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .site-title {
+                text-align: center;
+                flex-grow: 0;
+            }
+
+            header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem 1rem;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: rgba(255, 255, 255, 0.98);
+                padding-top: 5rem;
+                justify-content: flex-start;
+                align-items: center;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+                z-index: 1000;
+                overflow-y: auto;
+            }
+
+            nav ul.active {
+                transform: translateX(0);
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 0.7rem 0;
+                width: 90%;
+                text-align: center;
+            }
+
+            nav ul li a {
+                padding: 1rem;
+                border-bottom: 1px solid var(--border-color);
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .nav-toggle {
+                display: flex;
+                order: 2;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1 class="site-title"><a href="index.html">Money Magic</a></h1>
+        <!-- Mobile Navigation Toggle -->
+        <div class="nav-toggle" id="navToggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <!-- Main Navigation -->
+        <nav id="mainNav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="spell-categories.html">Browse Spells</a></li>
+                <li><a href="user-profile.html">My Favorites</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        <!-- Contact Section -->
+        <section>
+            <h2>Contact Us</h2>
+            <p>Have questions about a spell, feedback on our website, or just want to connect? Please reach out using the form below. We're here to help you on your journey to financial magic.</p>
+
+            <!-- Contact Form -->
+            <form action="#" method="POST">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required placeholder="Anonymous Anonymous">
+
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" name="email" required placeholder="contact@example.com">
+
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" required placeholder="Inquiry about a spell">
+
+                <label for="message">Your Message:</label>
+                <textarea id="message" name="message" rows="6" required placeholder="Type your message here..."></textarea>
+
+                <button type="submit" class="button">Send Message</button>
+            </form>
+
+            <!-- Additional Contact Info (Placeholder) -->
+            <div class="margin-top">
+                <h3>Other Ways to Connect</h3>
+                <p>While the form is preferred, you can also reach us via:</p>
+                <ul>
+                    <li><strong>Email:</strong> <a href="mailto:info@moneymagic.example.com" style="color: var(--link-color);">info@moneymagic.example.com</a></li>
+                    <li><strong>Phone:</strong> (Optional - Placeholder) +1 (555) 123-4567</li>
+                    <li><strong>Address:</strong> (Optional - Placeholder) 123 Mystic Lane, Abundance City, MA 01234</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; Anonymous Anonymous. All rights reserved.</p>
+        <p class="footer-note">Website for a 'Money Magic' PDF Prototype - Wireframe Only</p>
+    </footer>
+
+    <!-- JavaScript for Mobile Navigation Toggle -->
+    <script>
+        // JS for Hamburger Menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.getElementById('navToggle');
+            const mainNav = document.getElementById('mainNav').querySelector('ul');
+
+            navToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+<!-- contact.html content ends here -->
+```
